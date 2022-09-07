@@ -20,9 +20,9 @@ class Computer{
 
 	public String guess(String num){
 		//Verify Length
-		/*if(num.length() != numToGuess.length){
-			return "INVALID LENGTH: " + String.valueOf(num);
-		}*/
+		if(num.length() != numToGuess.length){
+			return "Invalid guess, please enter a valid guess";
+		}
 
 		//Validate input
 		if(!validateInput(num)){
