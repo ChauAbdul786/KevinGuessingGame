@@ -121,4 +121,12 @@ class Computer{
 		
 		return s;
 	}
+
+	public boolean validateInput(String s){
+		if(s.matches("[0-9]+")){
+			return true;
+		}
+
+		return false;
+	}
 }
