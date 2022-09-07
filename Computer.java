@@ -18,10 +18,9 @@ class Computer{
 		}
 	}
 
-	public String guess(int num){
+	public String guess(String num){
 		//Verify Length
-		boolean validityOfLength = verifyLength(num);
-		if(!validityOfLength){
+		if(num.length() != numToGuess.length){
 			return "INVALID LENGTH: " + String.valueOf(num);
 		}
 
@@ -31,11 +30,34 @@ class Computer{
 		//Verify Uniqueness 
 		boolean isUnique = verifyUniqueness(numberAsArray);
 		if(isUnique){
-			return "PASSED ALL TESTS: " + String.valueOf(num);
+			numGuesses++;
+			return checkGuess(numberAsArray);
 		}else{
-			return "NOT UNIQUE DIGITS: " + String.valueOf(num);
+			return "NOT UNIQUE DIGITS: " + num;
 		}
 
+	}
+
+	private String checkGuess(int[] num){
+		int numA = 0;
+		int numB = 0;
+
+		for(int i = 0; i < num.length; i++){
+			for(int j = 0; j < numToGuess.length; j++){
+				if(num[i] == numToGuess[j]){
+					if(i == j){
+						numA++;
+					}else{
+						numB++;
+					}
+				}
+			}
+		}
+
+		String stringA = String.valueOf(numA);
+		String stringB = String.valueOf(numB);
+
+		return (stringA + "A" + stringB + "B");
 	}
 
 	private boolean checkUniqueness(int num, int[] arr, int len){
@@ -48,7 +70,7 @@ class Computer{
 		return true;
 	}
 
-	private boolean verifyLength(int num){
+	/*private boolean verifyLength(int num){
 		int count = 0;
 		while(num > 0){
 			count++;
@@ -60,27 +82,27 @@ class Computer{
 		}
 
 		return false;
-	}
+	}*/
 
-	private int[] splitIntoArray(int num){
-		int len = numToGuess.length;
-		int[] toRet = new int[len];
-
-		for(int i = len - 1; i >= 0; i--){
-			toRet[i] = num % 10;
-			num /= 10;
+	private int[] splitIntoArray(String num){
+		int[] arr = new int[num.length()];
+		for(int i = 0; i < num.length(); i++){
+			arr[i] = num.charAt(i) - 48;
 		}
 
-		return toRet;
+		return arr;
 	}
 
 	private boolean verifyUniqueness(int[] arr){
-		boolean isUniqueDigit = true;
-		for(int i = arr.length - 1; i > 0; i--){
-			isUniqueDigit = checkUniqueness(arr[i], arr, i - 1);
-			if(!isUniqueDigit){
-				return false;
+		//Wildly Inefficient
+		int[] seenDigits = new int[numToGuess.length];
+		for(int i = 0; i < numToGuess.length; i++){
+			for(int j = 0; j < i; j++){
+				if(seenDigits[j] == arr[i]){
+					return false;
+				}
 			}
+			seenDigits[i] = arr[i];
 		}
 
 		return true;
