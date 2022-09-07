@@ -57,7 +57,11 @@ class GameLauncher{
 			System.out.print("Enter your guess: ");
 			selection = scan.nextLine();
 			if(!selection.equals("q")){
-				System.out.println(c.guess(selection));
+				if(c.validateInput(selection)){
+					System.out.println(c.guess(selection));					
+				}else{
+					System.out.println("Invalid guess, try again");
+				}
 			}
 
 		}
