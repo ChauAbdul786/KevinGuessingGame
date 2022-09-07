@@ -52,6 +52,8 @@ class GameLauncher{
 		int numDigits = Integer.parseInt(selection);
 		Computer c = new Computer(numDigits);
 		
+
+		System.out.println("(Guess \"q\" to quit)");
 		selection = "";
 		while(!selection.equals("q")){
 			System.out.print("Enter your guess: ");
