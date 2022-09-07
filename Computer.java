@@ -20,14 +20,20 @@ class Computer{
 
 	public String guess(String num){
 		//Verify Length
-		if(num.length() != numToGuess.length){
+		/*if(num.length() != numToGuess.length){
 			return "INVALID LENGTH: " + String.valueOf(num);
+		}*/
+
+		//Validate input
+		if(!validateInput(num)){
+			return "Invalid guess, please enter a valid guess";
 		}
 
 		//Split num into digits
 		int[] numberAsArray = splitIntoArray(num);
+		return checkGuess(numberAsArray);
 
-		//Verify Uniqueness 
+	/*	//Verify Uniqueness 
 		boolean isUnique = verifyUniqueness(numberAsArray);
 		if(isUnique){
 			numGuesses++;
@@ -35,7 +41,7 @@ class Computer{
 		}else{
 			return "NOT UNIQUE DIGITS: " + num;
 		}
-
+*/
 	}
 
 	private String checkGuess(int[] num){
@@ -56,6 +62,8 @@ class Computer{
 
 		String stringA = String.valueOf(numA);
 		String stringB = String.valueOf(numB);
+
+		numGuesses++;
 
 		return (stringA + "A" + stringB + "B");
 	}
@@ -122,7 +130,7 @@ class Computer{
 		return s;
 	}
 
-	public boolean validateInput(String s){
+	private boolean validateInput(String s){
 		if(s.matches("[0-9]+")){
 			return true;
 		}
