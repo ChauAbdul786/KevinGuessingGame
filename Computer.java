@@ -137,4 +137,8 @@ class Computer{
 
 		return false;
 	}
+
+	public String calculateGoalString(){
+		return (String.valueOf(numToGuess.length) + "A0B");
+	}
 }

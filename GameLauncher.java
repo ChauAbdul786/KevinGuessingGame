@@ -51,17 +51,26 @@ class GameLauncher{
 
 		int numDigits = Integer.parseInt(selection);
 		Computer c = new Computer(numDigits);
-		
 
 		System.out.println("(Guess \"q\" to quit)");
+		
+		String goalString =  c.calculateGoalString();
 		selection = "";
 		while(!selection.equals("q")){
 			System.out.print("Enter your guess: ");
 			selection = scan.nextLine();
+
+			String result = "";
+			
 			if(!selection.equals("q")){
-				System.out.println(c.guess(selection));
+				result = c.guess(selection);
+				System.out.println(result);
 			}
 
+			if(result.equals(goalString)){
+				System.out.println("\nYOU WIN!!!\nKevin is proud of you.\n");
+				break;
+			}
 		}
 
 		System.out.println(c.toString());
